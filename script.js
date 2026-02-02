@@ -33,7 +33,7 @@ class Store {
 
     async init() {
         try {
-            const res = await fetch('/api/data');
+            const res = await fetch('api/data.php');
             if (res.ok) {
                 const json = await res.json();
                 if (Object.keys(json).length > 0) {
@@ -47,7 +47,7 @@ class Store {
 
     async save() {
         try {
-            await fetch('/api/save', {
+            await fetch('api/save.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(this.data)
