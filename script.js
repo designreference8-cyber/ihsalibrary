@@ -28,22 +28,33 @@ const defaultData = {
 
 class Store {
     constructor() {
-        this.load();
+        this.data = defaultData; // Initial default
     }
 
-    load() {
-        const stored = localStorage.getItem('lms_data');
-        if (stored) {
-            this.data = JSON.parse(stored);
-            if (!this.data.reviews) this.data.reviews = []; // Migration
-        } else {
-            this.data = defaultData;
-            this.save();
+    async init() {
+        try {
+            const res = await fetch('/api/data');
+            if (res.ok) {
+                const json = await res.json();
+                if (Object.keys(json).length > 0) {
+                    this.data = json;
+                }
+            }
+        } catch (err) {
+            console.error('Failed to load DB:', err);
         }
     }
 
-    save() {
-        localStorage.setItem('lms_data', JSON.stringify(this.data));
+    async save() {
+        try {
+            await fetch('/api/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.data)
+            });
+        } catch (err) {
+            console.error('Failed to save DB:', err);
+        }
     }
 
     get(key) {
@@ -1372,8 +1383,15 @@ document.querySelectorAll('.nav-item').forEach(btn => {
 });
 
 // Start on Dashboard
-//Start on Dashboard
-navigate('dashboard');
+// Start on Dashboard
+(async () => {
+    try {
+        await store.init();
+    } catch (e) {
+        console.error('Init failed', e);
+    }
+    navigate('dashboard');
+})();
 
 
 // --- Helpers & Utilities ---
