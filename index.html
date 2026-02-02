@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IHSA LIBRARY</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Barcode Library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <!-- Screenshot Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- ZIP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-book-open"></i>
+                <span>IHSA LIBRARY</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-view="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </button>
+                <button class="nav-item admin-only" data-view="books">
+                    <i class="fa-solid fa-book"></i> Books Catalog
+                </button>
+                <button class="nav-item admin-only" data-view="members">
+                    <i class="fa-solid fa-users"></i> Students / Members
+                </button>
+                <button class="nav-item admin-only" data-view="circulation">
+                    <i class="fa-solid fa-rotate-left"></i> Circulation
+                </button>
+                <button class="nav-item admin-only" onclick="openAdminSettings()">
+                    <i class="fa-solid fa-user-gear"></i> Admin Settings
+                </button>
+                <button class="nav-item" onclick="logout()"
+                    style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="sidebar-user-info">
+                    <div class="avatar" id="user-avatar">A</div>
+                    <div class="details">
+                        <span class="name" id="user-name">Admin User</span>
+                        <span class="role" id="user-role">Librarian</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h2 id="page-title">Dashboard</h2>
+                <div class="actions">
+                    <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-gear"></i></button>
+                </div>
+            </header>
+
+            <div id="content-area" class="content-area">
+                <!-- Dynamic Content Loaded Here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals Container -->
+    <div id="modal-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
